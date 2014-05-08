@@ -13,9 +13,9 @@ public class TheRepeater {
 	final static Boolean DEBUG_ENABLE = true;
 	final static Boolean TIMER_ENABLE = true;
 
-	final static String FILE_NAME = "teste";// <<<--------
+	//final static String FILE_NAME = "teste";// <<<--------
 	//final static String FILE_NAME = "A-small-practice";// <<<--------
-	//final static String FILE_NAME = "A-large-practice";// <<<--------
+	final static String FILE_NAME = "A-large-practice";// <<<--------
 
 	final static String BASE = "C:/CodeJam/" + FILE_NAME;
 	final static String INPUT = BASE + ".in";
@@ -137,7 +137,7 @@ public class TheRepeater {
 		if(lista.size() == 1) return 0;
 		int[] soma = new int[lista.size()];
 		//int[] distMax = new int[lista.size()];
-		//Collections.sort(lista);
+		Collections.sort(lista);
 		
 		
 		if(lista.size()==2){
@@ -169,7 +169,7 @@ public class TheRepeater {
 			if(soma[i]<sum) {
 				r = i;
 				//dist=distMax[i];
-				//sum = soma[i];
+				sum = soma[i];
 			}
 		}
 		int Min,Max;
