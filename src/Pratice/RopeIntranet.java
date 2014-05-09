@@ -10,9 +10,9 @@ public class RopeIntranet {
 	final static Boolean DEBUG_ENABLE = true;
 	final static Boolean TIMER_ENABLE = true;
 
-	final static String FILE_NAME = "teste";// <<<--------
+	//final static String FILE_NAME = "teste";// <<<--------
 	//final static String FILE_NAME = "A-small-practice";// <<<--------
-	//final static String FILE_NAME = "A-large-practice";// <<<--------
+	final static String FILE_NAME = "A-large-practice";// <<<--------
 
 	final static String BASE = "C:/CodeJam/" + FILE_NAME;
 	final static String INPUT = BASE + ".in";

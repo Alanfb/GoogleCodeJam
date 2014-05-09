@@ -114,16 +114,18 @@ public class TheRepeater {
 			read[i] = new Scanner(str[i]);
 		}
 		
-		
+		//int[] qnt = new int[100];
 		int sum = 0,aux;
 		List<Integer> lista = new ArrayList<Integer>();
 		
 		for(i=0;i<auxS[0].length();i++){
+			int[] qnt = new int[100];
 			for(j=0;j<n;j++){
 				aux = read[j].useDelimiter("[^\\d]+").nextInt();
+				qnt[aux-1]++;
 				if(lista.contains(aux)==false) lista.add(aux);
 			}
-			sum += getDist(lista);
+			sum += getDist(lista,qnt);
 			lista.clear();
 		}
 		
@@ -132,51 +134,32 @@ public class TheRepeater {
 		System.out.println(sum);
 	}
 	
-	public static int getDist(List<Integer> lista){
-		int i,j,dist=0,dist2,sum=0,sum2=0,k=0;
+	public static int getDist(List<Integer> lista, int[] qnt){
+		int i,j,dist=0,dist2,sum=0;
 		if(lista.size() == 1) return 0;
 		int[] soma = new int[lista.size()];
-		//int[] distMax = new int[lista.size()];
 		Collections.sort(lista);
 		
 		
 		if(lista.size()==2){
-			return Math.abs(lista.get(1)-lista.get(0));
+			if(qnt[lista.get(1)-1] > qnt[lista.get(0)-1]) return Math.abs(lista.get(1)-lista.get(0))*qnt[lista.get(0)-1];
+			if(qnt[lista.get(1)-1] <= qnt[lista.get(0)-1]) return Math.abs(lista.get(1)-lista.get(0))*qnt[lista.get(1)-1];
 		}
 
 		for(i=0; i<lista.size();i++){
 			dist=-1;
 			for(j=0;j<lista.size();j++){
 				dist2 = Math.abs(lista.get(i)-lista.get(j));
-				if(dist2 > dist){
-					dist=dist2;
-				}
-				//sum += dist2;
-				soma[i] += dist2;
-				}
-				//distMax[i] = dist;
-				if(i!=0){
-					if(soma[i-1]<=soma[i]) {
-						k=i;
-						break;
-					}
+				soma[i] += dist2*qnt[lista.get(j)-1];
 				}
 		}
 		sum = soma[0];
-		//dist = distMax[0];
-		int r=0;
-		for(i=1;i<k;i++){
+		for(i=1;i<lista.size();i++){
 			if(soma[i]<sum) {
-				r = i;
-				//dist=distMax[i];
 				sum = soma[i];
 			}
 		}
-		int Min,Max;
-		Min = Collections.min(lista);
-		Max = Collections.max(lista);
-		dist = Math.abs(Min-lista.get(r)) + Math.abs(Max-lista.get(r));
-		return dist;
+		return sum;
 	}
 	
 	public static String compress(String str){
